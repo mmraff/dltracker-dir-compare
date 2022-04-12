@@ -1,0 +1,36 @@
+{
+  "name": "@offliner/dltracker-dir-compare",
+  "version": "0.0.1",
+  "description": "Compare directories of packages obtained by npm download",
+  "license": "MIT",
+  "author": {
+    "name": "Matthew Rafferty",
+    "email": "mmraff@gmail.com"
+  },
+  "main": "compare-cli.js",
+  "bin": {
+    "dltdir-compare": "./compare-cli.js"
+  },
+  "files": [
+    "intersections.js",
+    "simple-promisify.js",
+    "tally.js",
+    "uniques.js"
+  ],
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "commander": "^6.2.1",
+    "glob": "^7.1.7",
+    "@offliner/npm-package-filename": "^1.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^7.2",
+    "rimraf": "^2.6.3"
+  },
+  "engines": {
+    "node": ">= 6"
+  }
+}
