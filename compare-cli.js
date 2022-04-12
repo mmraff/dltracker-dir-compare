@@ -9,20 +9,24 @@ const getIntersects = require('./intersections')
 const getUniques = require('./uniques')
 
 const program = new Command()
-const { version: pkgVersion } = require('./package.json')
-program.version(pkgVersion)
+const { version: pkgVersion, bin: pkgBin } = require('./package.json')
+let execName; for (execName in pkgBin) break;
 
 program
-  .option('-c, --count', 'Only show counts for each combination of directories')
-  .option('-u, --unique', 'Only show packages that are unique to one of the directories')
-  .usage([
-    '[options] item_1... item_n',
+  .name(execName)
+  .version(pkgVersion)
+  .usage('[options] item_1... item_n')
+  .description([
+    'Compare directories of packages obtained by the `npm download` command',
     '',
     'The items must resolve to existing paths.',
     'At least two arguments are required if literal paths, but a glob expression',
     'that yields enough paths to result in at least two arguments will suffice.'
   ].join('\n'))
+  .option('-c, --count', 'Only show counts for each combination of directories')
+  .option('-u, --unique', 'Only show packages that are unique to each directory')
   .action(function() {
+    const processedArgs = []
 
     function evalNextArg(i) {
       if (i >= program.args.length) return Promise.resolve(null)
@@ -42,7 +46,6 @@ program
 
       const opts = {}
       if (program.count) opts.count = true
-      const processedArgs = []
       const outputFunc = program.unique ? showUniqueEntries : showDuplicates
       return evalNextArg(0).then(() => outputFunc(processedArgs, opts))
     })
@@ -63,7 +66,7 @@ function showDuplicates(args, opts) {
       return
     }
     console.log(
-      '\nShowing', opts.count ? 'counts of' : '',
+      `\nShowing ${opts.count ? 'counts of ' : ''}` +
       'packages in common among sets of directories:\n'
     )
     for (let i = 0; i < results.length; ++i) {
@@ -91,7 +94,7 @@ function showUniqueEntries(args, opts) {
       return
     }
     console.log(
-      '\nShowing', opts.count ? 'counts of' : '',
+      `\nShowing ${opts.count ? 'counts of ' : ''}` +
       'unique packages per directory:\n'
     )
     for (let d = 0; d < results.length; ++d) {
