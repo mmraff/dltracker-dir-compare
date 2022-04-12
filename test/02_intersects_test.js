@@ -206,7 +206,6 @@ describe('getIntersections function', function() {
       }
     })
 
-// TODO: The wording here should be improved
     it('should include in "files" only tarballs common to the indexed "dirs"', function(done) {
       expectFilesExist(currResults, dirSet)
       for (let i = 0; i < currResults.length; ++i)
