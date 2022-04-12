@@ -1,6 +1,6 @@
 {
   "name": "@offliner/dltracker-dir-compare",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Compare directories of packages obtained by npm download",
   "license": "MIT",
   "author": {
