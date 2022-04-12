@@ -9,7 +9,7 @@ In short, `npm download` fetches named packages, and all the packages of their d
 
 If one has used this command several times, retaining the results but not always reusing the same target directory, it may result in many duplicate copies of packages distributed across multiple directories.
 
-This module provides a command line interface to compare the contents of two or more such directories, and report what they have in common - or, alternately, what they have that none of the other directories have.
+This module provides a command line interface to compare the contents of two or more such directories, and report what they have in common - or, alternately, what each has that none of the other directories have.
 
 ## To Install
 
@@ -29,9 +29,9 @@ Enter the `dltdir-compare` command with the paths of two or more `npm download` 
 $ dltdir-compare PATH_1 PATH_2 [... PATH_n]
 ```
 
-A Posix glob expression may be given for one or more of the path arguments, provided that the argument list resolves to at least two existing directories. (TODO: link to glob ^7.1.7 README)
+A Posix glob expression may be given for one or more of the path arguments, provided that the argument list resolves to at least two existing directories. *See [documentation for **node-glob**](https://github.com/isaacs/node-glob/tree/v7.1.7#readme).*
 
-By default, dltdir-compare reports only the files that directories have in common. An option is provided to report files unique to each directory instead:
+By default, `dltdir-compare` reports only the files that directories have in common. An option is provided to report files unique to each directory instead:
 ```
 $ dltdir-compare --unique PATH_1 PATH_2 [... PATH_n]
 ```
@@ -41,9 +41,6 @@ Another option is provided to get counts rather than lists of files, whether in 
 $ dltdir-compare --count PATH_1 PATH_2 [... PATH_n]
 $ dltdir-compare --unique --count PATH_1 PATH_2 [... PATH_n]
 ```
-**TODO:**
-* in compare-cli.js, change --stats-only to --count
-* get the program name from package.json, and set it on the Command instance!
 
 Show version and exit:
 ```
